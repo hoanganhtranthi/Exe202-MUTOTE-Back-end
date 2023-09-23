@@ -2783,11 +2783,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PRN231\\EXE202_MuTote\\MuTote.API\\MuTote.API.csproj",
+      "projectUniqueName": "D:\\Exe202-MUTOTE-Back-end\\MuTote.API\\MuTote.API.csproj",
       "projectName": "MuTote.API",
-      "projectPath": "D:\\PRN231\\EXE202_MuTote\\MuTote.API\\MuTote.API.csproj",
+      "projectPath": "D:\\Exe202-MUTOTE-Back-end\\MuTote.API\\MuTote.API.csproj",
       "packagesPath": "C:\\Users\\Hoang Anh\\.nuget\\packages\\",
-      "outputPath": "D:\\PRN231\\EXE202_MuTote\\MuTote.API\\obj\\",
+      "outputPath": "D:\\Exe202-MUTOTE-Back-end\\MuTote.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2808,8 +2808,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\PRN231\\EXE202_MuTote\\MuTote.Service\\MuTote.Service.csproj": {
-              "projectPath": "D:\\PRN231\\EXE202_MuTote\\MuTote.Service\\MuTote.Service.csproj"
+            "D:\\Exe202-MUTOTE-Back-end\\MuTote.Service\\MuTote.Service.csproj": {
+              "projectPath": "D:\\Exe202-MUTOTE-Back-end\\MuTote.Service\\MuTote.Service.csproj"
             }
           }
         }

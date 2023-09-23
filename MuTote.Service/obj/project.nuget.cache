@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jqMluP/yHMUmDknc4jqnyk1Q51E+8aAHoFk1taSNPzKsk3xz5S6/E66YtOc7ElExovNuzBTZIkW+O60Dy97ePQ==",
+  "dgSpecHash": "6ejQOCO9L80j5LVicEBrG3SvyW1t53J/+o7jsztdPPZx7K4OyBiyDH00RXeHE6Fbqn3Y7isuo8f1Rl4vlWVpdw==",
   "success": true,
-  "projectFilePath": "D:\\PRN231\\EXE202_MuTote\\MuTote.Service\\MuTote.Service.csproj",
+  "projectFilePath": "D:\\Exe202-MUTOTE-Back-end\\MuTote.Service\\MuTote.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hoang Anh\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Hoang Anh\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
