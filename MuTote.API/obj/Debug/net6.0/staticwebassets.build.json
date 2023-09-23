@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "gMrHdlvm7X7woXZuTN3PotDiBA+3EeHMH1yZmRpKHQE=",
+  "Source": "MuTote.API",
+  "BasePath": "_content/MuTote.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,14 @@
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.csproj.AssemblyReference.cache
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.AssemblyInfoInputs.cache
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.AssemblyInfo.cs
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.csproj.CoreCompileInputs.cache
+D:\PRN231\EXE202_MuTote\MuTote.Data\bin\Debug\net6.0\MuTote.Data.deps.json
+D:\PRN231\EXE202_MuTote\MuTote.Data\bin\Debug\net6.0\MuTote.Data.dll
+D:\PRN231\EXE202_MuTote\MuTote.Data\bin\Debug\net6.0\MuTote.Data.pdb
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.dll
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\refint\MuTote.Data.dll
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.pdb
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\ref\MuTote.Data.dll
+D:\PRN231\EXE202_MuTote\MuTote.Data\bin\Debug\net6.0\MuTote.Data.runtimeconfig.json
+D:\PRN231\EXE202_MuTote\MuTote.Data\obj\Debug\net6.0\MuTote.Data.genruntimeconfig.cache
