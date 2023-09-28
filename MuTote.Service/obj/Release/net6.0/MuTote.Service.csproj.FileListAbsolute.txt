@@ -1,0 +1,17 @@
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Service.deps.json
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Service.runtimeconfig.json
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Service.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Service.pdb
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Data.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\bin\Release\net6.0\MuTote.Data.pdb
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.csproj.AssemblyReference.cache
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.AssemblyInfoInputs.cache
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.AssemblyInfo.cs
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.csproj.CoreCompileInputs.cache
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.csproj.CopyComplete
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\refint\MuTote.Service.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.pdb
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\MuTote.Service.genruntimeconfig.cache
+D:\Exe202-MUTOTE-Back-end\MuTote.Service\obj\Release\net6.0\ref\MuTote.Service.dll

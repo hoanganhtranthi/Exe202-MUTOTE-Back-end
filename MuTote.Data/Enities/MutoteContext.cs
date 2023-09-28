@@ -41,6 +41,8 @@ namespace MuTote.Data.Enities
             {
                 entity.ToTable("CategoryMaterial");
 
+                entity.Property(e => e.CateMaterialImg).IsUnicode(false);
+
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -49,6 +51,8 @@ namespace MuTote.Data.Enities
             modelBuilder.Entity<CategoryProduct>(entity =>
             {
                 entity.ToTable("CategoryProduct");
+
+                entity.Property(e => e.CateProductImg).IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -62,6 +66,8 @@ namespace MuTote.Data.Enities
                 entity.Property(e => e.Address).HasMaxLength(100);
 
                 entity.Property(e => e.Avatar).IsUnicode(false);
+
+                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
@@ -96,12 +102,6 @@ namespace MuTote.Data.Enities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Gender)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.GoogleId).IsUnicode(false);
-
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -124,17 +124,21 @@ namespace MuTote.Data.Enities
                 entity.HasOne(d => d.CategoryMaterial)
                     .WithMany(p => p.Materials)
                     .HasForeignKey(d => d.CategoryMaterialId)
-                    .HasConstraintName("FK__Material__Catego__60A75C0F");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Material__Catego__6B24EA82");
             });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.OrderDate).HasColumnType("date");
 
+                entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 0)");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Orders__Customer__6C190EBB");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Orders__Customer__76969D2E");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
@@ -144,19 +148,19 @@ namespace MuTote.Data.Enities
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK__OrderDeta__Order__6EF57B66");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OrderDeta__Order__797309D9");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__OrderDeta__Produ__6FE99F9F");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__OrderDeta__Produ__7A672E12");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product");
-
-                entity.Property(e => e.Brand).HasMaxLength(20);
 
                 entity.Property(e => e.Description).HasMaxLength(200);
 
@@ -166,12 +170,13 @@ namespace MuTote.Data.Enities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Rate).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.CategoryProduct)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryProductId)
-                    .HasConstraintName("FK__Product__Categor__6383C8BA");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Product__Categor__6E01572D");
             });
 
             modelBuilder.Entity<WishList>(entity =>
@@ -181,12 +186,14 @@ namespace MuTote.Data.Enities
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.WishLists)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__WishList__Custom__68487DD7");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__WishList__Custom__72C60C4A");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.WishLists)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK__WishList__Produc__693CA210");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__WishList__Produc__73BA3083");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -8,8 +8,8 @@ namespace MuTote.Data.Enities
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Img { get; set; } = null!;
-        public int? CategoryMaterialId { get; set; }
+        public int CategoryMaterialId { get; set; }
 
-        public virtual CategoryMaterial? CategoryMaterial { get; set; }
+        public virtual CategoryMaterial CategoryMaterial { get; set; } = null!;
     }
 }
