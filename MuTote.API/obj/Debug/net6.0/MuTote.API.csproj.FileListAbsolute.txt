@@ -136,3 +136,9 @@ D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Debug\net6.0\scopedcss\bundle\MuTote.AP
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Debug\net6.0\MuTote.API.csproj.CopyComplete
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Debug\net6.0\MuTote.API.genruntimeconfig.cache
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Debug\net6.0\ref\MuTote.API.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\Firebase.Auth.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\Firebase.Storage.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\System.ServiceModel.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Debug\net6.0\Twilio.dll

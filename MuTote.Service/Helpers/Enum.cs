@@ -25,5 +25,10 @@ namespace MuTote.Service.Helpers
             Pending = 1,
             Finish = 0
         }
+        public enum CategoryChoice
+        {
+            Product=1,
+            Material=0
+        }
     }
 }
