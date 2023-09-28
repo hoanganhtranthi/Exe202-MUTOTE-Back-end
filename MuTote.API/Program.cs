@@ -47,6 +47,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 else
 {
     app.UseSwagger();
@@ -56,6 +57,8 @@ else
         options.RoutePrefix = String.Empty;
     });
 }
+
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 app.UseHttpsRedirection();
 app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 app.UseCors("_myAllowSpecificOrigins");
