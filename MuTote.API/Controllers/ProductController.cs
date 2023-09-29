@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MuTote.Service.DTO.Request;
 using MuTote.Service.DTO.Response;
 using MuTote.Service.Services.ISerive;
@@ -15,7 +16,7 @@ namespace MuTote.API.Controllers
             _productService = productService;
         }
         /// <summary>
-        /// Get list of categories
+        /// Get list of products
         /// </summary>
         /// <param name="pagingRequest"></param>
         /// <param name="productRequest"></param>
@@ -53,7 +54,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ProductResponse>> DeleteProduct(int id, int unitInStock)
         {
@@ -66,7 +67,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost()]
         public async Task<ActionResult<ProductResponse>> CreateProduct(CreateProductRequest product)
         {

@@ -39,6 +39,26 @@ namespace MuTote.API.Mapper
             CreateMap<Product, ProductResponse>().ReverseMap();
             CreateMap<ProductRequest, ProductResponse>().ReverseMap();
             CreateMap<CreateProductRequest, Product>().ReverseMap();
+
+            CreateMap<Designer, DesignerResponse>().ReverseMap();
+            CreateMap<Designer, DesignerRequest>().ReverseMap();
+            CreateMap<UpdateDesignerRequest, Designer>().ReverseMap();
+            CreateMap<CreateDesignerRequest, Designer>().ReverseMap();
+            CreateMap<DesignerRequest, DesignerResponse>().ReverseMap();
+
+            CreateMap<Order, OrderResponse>().ReverseMap();
+            CreateMap<OrderDetail, OrderDetailResponse>().ReverseMap();
+            CreateMap<OrderDetailRequest, OrderDetail>();
+            CreateMap<CreateOrderRequest, Order>();
+            CreateMap<CreateOrderProductDesignRequest, Order>().ReverseMap();
+            CreateMap<OrderRequest, Order>().ReverseMap();
+            CreateMap<OrderRequest, OrderResponse>().ReverseMap();
+            CreateMap<OrderDetailRequest, OrderDetailResponse>().ReverseMap();
+
+            CreateMap<WishList, WishListRequest>().ReverseMap();
+            CreateMap<WishList, WishListResponse>().ReverseMap();
+            CreateMap<WishListRequest, WishListResponse>().ReverseMap();
+            CreateMap<CreateWishListRequest, WishList>().ReverseMap();
         }
 
     }

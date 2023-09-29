@@ -98,9 +98,17 @@ namespace MuTote.Data.Enities
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
+                entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GoogleId).IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
@@ -126,6 +134,11 @@ namespace MuTote.Data.Enities
                     .HasForeignKey(d => d.CategoryMaterialId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Material__Catego__6B24EA82");
+
+                entity.HasOne(d => d.Designer)
+                    .WithMany(p => p.Materials)
+                    .HasForeignKey(d => d.DesignerId)
+                    .HasConstraintName("FK__Material__Design__7D439ABD");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -148,7 +161,6 @@ namespace MuTote.Data.Enities
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderDeta__Order__797309D9");
 
                 entity.HasOne(d => d.Product)

@@ -19,7 +19,7 @@ namespace MuTote.Data.Enities
         public byte[] PasswordSalt { get; set; } = null!;
         public string? Phone { get; set; }
         public string? Address { get; set; }
-        public int? Status { get; set; }
+        public int Status { get; set; }
         public string? Gender { get; set; }
         public string? GoogleId { get; set; }
         public DateTime? DateOfBirth { get; set; }
