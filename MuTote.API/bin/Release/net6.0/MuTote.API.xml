@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MuTote.API</name>
+    </assembly>
+    <members>
+        <member name="M:MuTote.API.Controllers.CategoryController.GetCategorys(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.CategoryRequest,MuTote.Service.Helpers.Enum.CategoryChoice)">
+            <summary>
+            Get list of categories
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="categoryRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CategoryController.GetCategory(System.Int32,MuTote.Service.Helpers.Enum.CategoryChoice)">
+            <summary>
+            Get category by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CategoryController.UpdateCategory(MuTote.Service.DTO.Request.CreateCategoryRequest,System.Int32,MuTote.Service.Helpers.Enum.CategoryChoice)">
+            <summary>
+            Update information of category
+            </summary>
+            <param name="categoryRequest"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CategoryController.DeleteCategory(System.Int32,MuTote.Service.Helpers.Enum.CategoryChoice)">
+            <summary>
+            Delete category
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CategoryController.CreateCategory(MuTote.Service.DTO.Request.CreateCategoryRequest,MuTote.Service.Helpers.Enum.CategoryChoice)">
+            <summary>
+            Create category
+            </summary>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.GetCustomers(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.CustomerRequest)">
+            <summary>
+            Get list of customers
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="userRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.GetCustomer(System.Int32)">
+            <summary>
+            Get customer by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.UpdateCustomer(MuTote.Service.DTO.Request.UpdateCustomerRequest,System.Int32)">
+            <summary>
+            Update profile of customer
+            </summary>
+            <param name="userRequest"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.GetToUpdateStatus(System.Int32)">
+            <summary>
+            Delete customer
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.Verification(System.String,System.String)">
+            <summary>
+            Send OTP 
+            </summary>
+            <param name="request"></param>
+            <param name="phone"></param>
+            <param name="googleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.CreateCustomer(MuTote.Service.DTO.Request.CreateCustomerRequest)">
+            <summary>
+            Sign Up account of customer
+            </summary>
+            <param name="customer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.Login(MuTote.Service.DTO.Request.LoginRequest)">
+            <summary>
+            Login by phone and password
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.LoginGoogle(System.String)">
+            <summary>
+            Login by googleId
+            </summary>
+            <param name="googleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.ResetPassword(MuTote.Service.DTO.Request.ResetPasswordRequest)">
+            <summary>
+            Reset password when forgot password
+            </summary>
+            <param name="resetPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.CustomerController.GetJwt(System.Int32)">
+            <summary>
+            Get JWT of account
+            </summary>
+            <param name="resetPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.GetDesigners(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.DesignerRequest)">
+            <summary>
+            Get list of designers
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="userRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.GetDesigner(System.Int32)">
+            <summary>
+            Get designer by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.UpdateDesigner(MuTote.Service.DTO.Request.UpdateDesignerRequest,System.Int32)">
+            <summary>
+            Update profile of designer
+            </summary>
+            <param name="userRequest"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.GetToUpdateStatus(System.Int32)">
+            <summary>
+            Delete designer
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.Verification(System.String,System.String)">
+            <summary>
+            Send OTP 
+            </summary>
+            <param name="request"></param>
+            <param name="phone"></param>
+            <param name="googleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.CreateDesigner(MuTote.Service.DTO.Request.CreateDesignerRequest)">
+            <summary>
+            Sign Up account of designer by phone
+            </summary>
+            <param name="designer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.Login(MuTote.Service.DTO.Request.LoginRequest)">
+            <summary>
+            Login
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.LoginGoogle(System.String)">
+            <summary>
+            Sign Up account of designer by googleId
+            </summary>
+            <param name="googleId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.ResetPassword(MuTote.Service.DTO.Request.ResetPasswordRequest)">
+            <summary>
+            Reset password when forgot password
+            </summary>
+            <param name="resetPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.DesignerController.GetJwt(System.Int32)">
+            <summary>
+            Get JWT of account
+            </summary>
+            <param name="resetPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.MaterialController.GetMaterials(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.MaterialRequest)">
+            <summary>
+            Get list of materials
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="materialRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.MaterialController.GetMaterial(System.Int32)">
+            <summary>
+            Get material by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.MaterialController.DeleteMaterial(System.Int32)">
+            <summary>
+            Delete material
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.MaterialController.CreateMaterial(MuTote.Service.DTO.Request.CreateMaterialRequest)">
+            <summary>
+            Create material
+            </summary>
+            <param name="material"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.OrderController.GetOrders(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.OrderRequest)">
+            <summary>
+            Get list of orders
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="orderRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.OrderController.GetOrder(System.Int32)">
+            <summary>
+            Get order by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.OrderController.GetToUpdateStatus(System.Int32)">
+            <summary>
+            Delete order
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.OrderController.CreateOrder(MuTote.Service.DTO.Request.CreateOrderRequest)">
+            <summary>
+            Create order
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.OrderController.CreateOrderDesignProduct(MuTote.Service.DTO.Request.CreateOrderProductDesignRequest)">
+            <summary>
+            Create order for designed product
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.ProductController.GetProducts(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.ProductRequest)">
+            <summary>
+            Get list of products
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="productRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.ProductController.GetProduct(System.Int32)">
+            <summary>
+            Get product by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.ProductController.GetProductsBestSeller(MuTote.Service.DTO.Request.PagingRequest)">
+            <summary>
+            Get best seller products
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.ProductController.DeleteProduct(System.Int32,System.Int32)">
+            <summary>
+            Update product's unit in stock
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.ProductController.CreateProduct(MuTote.Service.DTO.Request.CreateProductRequest)">
+            <summary>
+            Create product
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.WishListController.GetWishLists(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.WishListRequest)">
+            <summary>
+            Get list of wishlists
+            </summary>
+            <param name="pagingRequest"></param>
+            <param name="wishlistRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.WishListController.GetWishList(System.Int32)">
+            <summary>
+            Get wishlist by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.WishListController.UpdateWishList(System.Int32,System.Int32)">
+            <summary>
+            Update information of wishlist
+            </summary>
+            <param name="wishlistRequest"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.WishListController.DeleteWishList(System.Int32)">
+            <summary>
+            Delete wishlist
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MuTote.API.Controllers.WishListController.CreateWishList(MuTote.Service.DTO.Request.CreateWishListRequest)">
+            <summary>
+            Create wishlist
+            </summary>
+            <param name="wishlist"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

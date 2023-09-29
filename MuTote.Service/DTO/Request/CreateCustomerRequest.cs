@@ -16,6 +16,7 @@ namespace MuTote.Service.DTO.Request
         [Required(ErrorMessage = "Email is required !")]
         [EmailAddress]
         public string Email { get; set; } = null!;
+        [StringLength(11, MinimumLength = 10, ErrorMessage = "Phone is invalid")]
         public string? Phone { get; set; }
         public string? Address { get; set; }
         [Required(ErrorMessage = "Password is required !")]
@@ -31,5 +32,6 @@ namespace MuTote.Service.DTO.Request
         public string? GoogleId { get; set; }
         [DateRange]
         public DateTime? DateOfBirth { get; set; }
+
     }
 }

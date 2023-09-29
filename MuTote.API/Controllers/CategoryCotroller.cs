@@ -46,7 +46,7 @@ namespace MuTote.API.Controllers
         /// <param name="categoryRequest"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-       // [Authorize(Roles = "admin")]
+       [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoryResponse>> UpdateCategory([FromBody] CreateCategoryRequest categoryRequest, int id, Service.Helpers.Enum.CategoryChoice choice)
         {
@@ -59,7 +59,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<CategoryResponse>> DeleteCategory(int id, Service.Helpers.Enum.CategoryChoice choice)
         {
@@ -72,7 +72,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="category"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost()]
         public async Task<ActionResult<CategoryResponse>> CreateCategory(CreateCategoryRequest category, Service.Helpers.Enum.CategoryChoice choice)
         {

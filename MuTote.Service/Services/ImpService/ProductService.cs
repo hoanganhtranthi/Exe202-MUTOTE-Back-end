@@ -48,7 +48,7 @@ namespace MuTote.Service.Services.ImpService
                 ProductResponse rs = new ProductResponse();
                 foreach (var ord in orders)
                 {
-                    rs =_mapper.Map<ProductResponse>(_unitOfWork.Repository<Product>().GetAll().Where(a => a.Id == ord.ProductId).SingleOrDefaultAsync());
+                    rs =_mapper.Map<ProductResponse>(_unitOfWork.Repository<Product>().GetAll().Include(a=>a.CategoryProduct).Where(a => a.Id == ord.ProductId).SingleOrDefault());
                     list.Add(rs);
                 }
                 var listPro = PageHelper<ProductResponse>.Paging(list, paging.Page, paging.PageSize);

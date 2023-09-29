@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MuTote.Service.DTO.Request;
 using MuTote.Service.DTO.Response;
 using MuTote.Service.Services.ISerive;
+using System.Data;
 
 namespace MuTote.API.Controllers
 {
@@ -15,7 +17,7 @@ namespace MuTote.API.Controllers
             _materialService = materialService;
         }
         /// <summary>
-        /// Get list of categories
+        /// Get list of materials
         /// </summary>
         /// <param name="pagingRequest"></param>
         /// <param name="materialRequest"></param>
@@ -56,7 +58,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="material"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin" + "," + "designer")]
         [HttpPost()]
         public async Task<ActionResult<MaterialResponse>> CreateMaterial(CreateMaterialRequest material)
         {

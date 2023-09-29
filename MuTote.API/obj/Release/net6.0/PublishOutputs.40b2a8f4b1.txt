@@ -8,6 +8,7 @@ D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\AutoMapper.dl
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Firebase.Auth.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Firebase.Storage.dll
+D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -56,4 +57,5 @@ D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.Data.d
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.Service.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.Service.pdb
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.Data.pdb
+D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.API.xml
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\PubTmp\Out\MuTote.API.deps.json

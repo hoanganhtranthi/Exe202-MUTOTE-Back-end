@@ -14,11 +14,9 @@ namespace MuTote.Service.Helpers
             OutOfStock = 0
         }
         public enum OrderStatusEnum
-        {
-            StoreCancel = 0,
-            Pending = 1,
-            Assign = 2,
-            Finish = 3
+        {          
+            Pending = 0,
+            Finish = 1
         }
         public enum PaymentEnum
         {

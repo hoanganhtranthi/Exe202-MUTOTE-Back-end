@@ -35,7 +35,7 @@ namespace MuTote.Service.Services.ImpService
                 {
                     throw new CrudException(HttpStatusCode.BadRequest, "Id Material Invalid", "");
                 }
-                var response = _unitOfWork.Repository<Material>().GetAll().Include(c => c.CategoryMaterial).Where(u => u.Id == id).SingleOrDefault();
+                var response = _unitOfWork.Repository<Material>().GetAll().Include(c => c.CategoryMaterial).Include(c=>c.Designer).Where(u => u.Id == id).SingleOrDefault();
 
                 if (response == null)
                 {
@@ -60,7 +60,7 @@ namespace MuTote.Service.Services.ImpService
             {
 
                 var filter = _mapper.Map<MaterialResponse>(request);
-                var materials = _unitOfWork.Repository<Material>().GetAll().Include(c=>c.CategoryMaterial)
+                var materials = _unitOfWork.Repository<Material>().GetAll().Include(c=>c.CategoryMaterial).Include(c => c.Designer)
                                            .ProjectTo<MaterialResponse>(_mapper.ConfigurationProvider)
                                            .DynamicFilter(filter)
                                            .ToList();
@@ -78,7 +78,7 @@ namespace MuTote.Service.Services.ImpService
         {
             try
             {
-                    var materialRequest =  _unitOfWork.Repository<Material>().GetAll().Include(c=>c.CategoryMaterial).Where(u => u.Name == material.Name).SingleOrDefault();
+                    var materialRequest =  _unitOfWork.Repository<Material>().GetAll().Include(c=>c.CategoryMaterial).Include(c => c.Designer).Where(u => u.Name == material.Name).SingleOrDefault();
                     if (material == null)
                     {
                         throw new CrudException(HttpStatusCode.BadRequest, "Material Invalid!!!", "");
@@ -112,7 +112,7 @@ namespace MuTote.Service.Services.ImpService
                 {
                     throw new CrudException(HttpStatusCode.BadRequest, "Id Material Invalid", "");
                 }
-                var response =  _unitOfWork.Repository<Material>().GetAll().Include(c => c.CategoryMaterial).Where(u => u.Id==id).SingleOrDefault();
+                var response =  _unitOfWork.Repository<Material>().GetAll().Include(c => c.CategoryMaterial).Include(c => c.Designer).Where(u => u.Id==id).SingleOrDefault();
 
                 if (response == null)
                 {

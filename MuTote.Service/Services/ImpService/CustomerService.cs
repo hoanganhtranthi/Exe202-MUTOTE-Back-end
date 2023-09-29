@@ -239,13 +239,20 @@ namespace MuTote.Service.Services.ImpService
         {
             try
             {
-                var user = _unitOfWork.Repository<Customer>().GetAll()
+                Customer user = new Customer();
+                string pass = _config["AdminAccount:Password"];
+                if (request.Phone.Equals(_config["AdminAccount:Phone"]) && request.Password.Equals(pass))
+                    user.Name = "Admin";
+                else
+                {
+                    user = _unitOfWork.Repository<Customer>().GetAll()
                    .FirstOrDefault(u => u.Phone.Equals(request.Phone.Trim()));
 
-                if (user == null) throw new CrudException(HttpStatusCode.BadRequest, "User Not Found", "");
-                if (!VerifyPasswordHash(request.Password.Trim(), user.PasswordHash, user.PasswordSalt))
-                    throw new CrudException(HttpStatusCode.BadRequest, "Password is incorrect", "");
-                if(user.Status==0) throw new CrudException(HttpStatusCode.BadRequest, "Your account is block", "");
+                    if (user == null) throw new CrudException(HttpStatusCode.BadRequest, "User Not Found", "");
+                    if (!VerifyPasswordHash(request.Password.Trim(), user.PasswordHash, user.PasswordSalt))
+                        throw new CrudException(HttpStatusCode.BadRequest, "Password is incorrect", "");
+                    if (user.Status == 0) throw new CrudException(HttpStatusCode.BadRequest, "Your account is block", "");
+                }
                 var cus = _mapper.Map<Customer, CustomerResponse>(user);
                 cus.Token = GenerateJwtToken(user);
                 return cus;
@@ -373,32 +380,33 @@ namespace MuTote.Service.Services.ImpService
                 return computedHash.SequenceEqual(passwordHash);
             }
         }
-        private string GenerateJwtToken(Customer customer)
+        private string GenerateJwtToken(Customer? customer)
         {
-            string role;
-            string pass = _config["AdminAccount:Password"];
-            if (customer.Phone.Equals(_config["AdminAccount:Phone"]) && VerifyPasswordHash(pass.Trim(), customer.PasswordHash, customer.PasswordSalt))
-                role = "admin";
-            else role = "customer";
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_config["ApiSetting:Secret"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor();
+            if (customer.Name != "Admin")
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
+                tokenDescriptor.Subject = new ClaimsIdentity(new Claim[]
+                 {
                 new Claim(ClaimTypes.NameIdentifier, customer.Id.ToString()),
-                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Role, "customer"),
                 new Claim(ClaimTypes.Name , customer.Name),
                 new Claim(ClaimTypes.Email , customer.Email),
-                new Claim("ImageUrl", customer.Avatar ?? ""),
                 new Claim("GoogleId", customer.GoogleId ?? ""),
                 new Claim(ClaimTypes.MobilePhone , customer.Phone),
-                }),
-                Expires = DateTime.UtcNow.AddYears(1),
-                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
+                 });               
+            }
+            else
+            {
+                tokenDescriptor.Subject = new ClaimsIdentity(new Claim[]
+                {
+                new Claim(ClaimTypes.Role, "admin"),
+                 new Claim(ClaimTypes.Name , customer.Name)
+                });
+            }
+            tokenDescriptor.Expires = DateTime.UtcNow.AddYears(1);
+            tokenDescriptor.SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

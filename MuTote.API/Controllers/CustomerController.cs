@@ -15,12 +15,10 @@ namespace MuTote.API.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerService _userService;
-        private readonly IFileStorageService _fileStorageService;
-        public const long MAX_UPLOAD_FILE_SIZE = 25000000;//File size must lower than 25MB
-        public CustomerController(ICustomerService userService,IFileStorageService fileStorageService)
+
+        public CustomerController(ICustomerService userService)
         {
             _userService = userService;
-            _fileStorageService = fileStorageService;
         }
         /// <summary>
         /// Get list of customers
@@ -28,7 +26,7 @@ namespace MuTote.API.Controllers
         /// <param name="pagingRequest"></param>
         /// <param name="userRequest"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<ActionResult<List<CustomerResponse>>> GetCustomers([FromQuery] PagingRequest pagingRequest, [FromQuery] CustomerRequest userRequest)
         {
@@ -40,7 +38,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-       // [Authorize(Roles = "admin")]
+       [Authorize(Roles = "admin")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CustomerResponse>> GetCustomer(int id)
         {
@@ -53,7 +51,7 @@ namespace MuTote.API.Controllers
         /// <param name="userRequest"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "customer")]
+        [Authorize(Roles = "customer")]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<CustomerResponse>> UpdateCustomer([FromBody] UpdateCustomerRequest userRequest, int id)
         {
@@ -66,7 +64,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet("{cusId:int}/blocked-user")]
         public async Task<ActionResult<CustomerResponse>> GetToUpdateStatus(int cusId)
         {
@@ -88,7 +86,7 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Sign Up account of customer by phone
+        /// Sign Up account of customer
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
@@ -100,7 +98,7 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Login
+        /// Login by phone and password
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -112,7 +110,7 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Sign Up account of customer by googleId
+        /// Login by googleId
         /// </summary>
         /// <param name="googleId"></param>
         /// <returns></returns>
@@ -140,7 +138,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="resetPassword"></param>
         /// <returns></returns>
-        [HttpGet("get-jwt/{id}")]
+        [HttpGet("jwt/{id}")]
         public async Task<ActionResult<string>> GetJwt(int id)
         {
             var rs = await _userService.GetJwt(id);
