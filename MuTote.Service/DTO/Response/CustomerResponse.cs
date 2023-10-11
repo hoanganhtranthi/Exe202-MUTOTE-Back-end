@@ -29,6 +29,5 @@ namespace MuTote.Service.DTO.Response
         [IntAttribute]
         public int? Status { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public string Token { get; set; }
     }
 }

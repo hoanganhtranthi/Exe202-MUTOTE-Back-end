@@ -18,6 +18,8 @@ using AutoMapper.QueryableExtensions;
 using MuTote.Service.Helpers;
 using MuTote.Service.Utilities;
 using static System.Formats.Asn1.AsnWriter;
+using Hangfire;
+using BookStore.Data.Extensions;
 
 namespace MuTote.Service.Services.ImpService
 {
@@ -25,11 +27,15 @@ namespace MuTote.Service.Services.ImpService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IProductService productService;
+        private readonly ICacheService cache;
 
-        public OrderService(IUnitOfWork unitOfWork, IMapper mapper)
+        public OrderService(IUnitOfWork unitOfWork, IMapper mapper, IProductService productService, ICacheService cache)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            this.productService = productService;
+            this.cache = cache;
         }
         public async Task<OrderResponse> CreateOrder(CreateOrderRequest request)
         {
@@ -74,7 +80,9 @@ namespace MuTote.Service.Services.ImpService
 
                     await _unitOfWork.Repository<Order>().CreateAsync(order);
                     await _unitOfWork.CommitAsync();
-
+                var jobId = BackgroundJob.Schedule(() => 
+                    productService.GetBestSellerProduct(),
+                            TimeSpan.FromMinutes(5));
                     var customerResult = _mapper.Map<Customer, CustomerResponse>(order.Customer);
 
                     var orderResult = _unitOfWork.Repository<Order>().GetAll()

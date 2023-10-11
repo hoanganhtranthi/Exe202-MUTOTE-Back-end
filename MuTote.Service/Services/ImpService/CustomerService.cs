@@ -51,7 +51,7 @@ namespace MuTote.Service.Services.ImpService
             else
                 return false;
         }
-        public async Task<CustomerResponse> CreateCustomer(CreateCustomerRequest request)       {
+        public async Task<JWTResponse> CreateCustomer(CreateCustomerRequest request)       {
             try
             {
                 var customer = _mapper.Map<CreateCustomerRequest, Customer>(request);
@@ -71,8 +71,10 @@ namespace MuTote.Service.Services.ImpService
                 customer.Status = 1;
                 await _unitOfWork.Repository<Customer>().CreateAsync(customer);
                 await _unitOfWork.CommitAsync();
-
-                return _mapper.Map<Customer, CustomerResponse>(customer);
+                JWTResponse jWTResponse = new JWTResponse();
+                jWTResponse.Customer= _mapper.Map<Customer, CustomerResponse>(customer);
+                jWTResponse.Token=GenerateJwtToken(customer);
+                return jWTResponse;
             }
             catch (CrudException ex)
             {
@@ -235,7 +237,7 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-        public async Task<CustomerResponse> Login(LoginRequest request)
+        public async Task<JWTResponse> Login(LoginRequest request)
         {
             try
             {
@@ -254,8 +256,10 @@ namespace MuTote.Service.Services.ImpService
                     if (user.Status == 0) throw new CrudException(HttpStatusCode.BadRequest, "Your account is block", "");
                 }
                 var cus = _mapper.Map<Customer, CustomerResponse>(user);
-                cus.Token = GenerateJwtToken(user);
-                return cus;
+                JWTResponse jWTResponse = new JWTResponse();
+                jWTResponse.Customer = cus;
+                jWTResponse.Token= GenerateJwtToken(user);                
+                return jWTResponse;
             }
             catch (CrudException ex)
             {
@@ -267,7 +271,7 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-        public async Task<CustomerResponse> LoginByGoogle(string googleId)
+        public async Task<JWTResponse> LoginByGoogle(string googleId)
         {
             try
             {
@@ -276,8 +280,10 @@ namespace MuTote.Service.Services.ImpService
 
                 if (user == null) throw new CrudException(HttpStatusCode.BadRequest, $"User Not Found with googleId {googleId}", "");
                 var cus = _mapper.Map<Customer, CustomerResponse>(user);
-                cus.Token = GenerateJwtToken(user);
-                return cus;
+                JWTResponse jWTResponse = new JWTResponse();
+                jWTResponse.Customer = cus;
+                jWTResponse.Token = GenerateJwtToken(user);
+                return jWTResponse;
             }
             catch (CrudException ex)
             {

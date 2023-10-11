@@ -10,7 +10,8 @@ namespace MuTote.Service.Helpers
     {      
         public enum ProductStatusEnum
         {
-            Avaliable = 1,
+            NewProduct=1,
+            Avaliable = 2,
             OutOfStock = 0
         }
         public enum OrderStatusEnum

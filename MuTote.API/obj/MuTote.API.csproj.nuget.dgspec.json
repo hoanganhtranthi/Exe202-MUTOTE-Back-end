@@ -64,6 +64,14 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.3, )"
+            },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.22, )"
@@ -95,6 +103,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.122, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -188,6 +200,14 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.3, )"
+            },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.22, )"
@@ -219,6 +239,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.122, )"
             },
             "System.Linq.Dynamic.Core": {
               "target": "Package",
@@ -309,6 +333,14 @@
               "target": "Package",
               "version": "[1.0.3, )"
             },
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.8.3, )"
+            },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.8.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.22, )"
@@ -340,6 +372,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.122, )"
             },
             "System.Linq.Dynamic.Core": {
               "target": "Package",

@@ -16,11 +16,13 @@ namespace MuTote.Service.DTO.Response
         public string? Img { get; set; }
         public decimal Price { get; set; }
         public string? Description { get; set; }
-        [IntAttribute]
         public int? UnitInStock { get; set; }
         [IntAttribute]
         public int? CategoryProductId { get; set; }
-
+        [IntAttribute]
+        public int? Status { get; set; }
+        [BooleanAttribute]
+        public bool? IsBestSeller { get; set; }
         public virtual CategoryResponse CategoryProduct { get; set; }
     }
 }
