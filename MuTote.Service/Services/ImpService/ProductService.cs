@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using BookStore.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using MuTote.Data.Enities;
 using MuTote.Data.UnitOfWork;
@@ -16,6 +17,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Twilio.Http;
+using static MuTote.Service.Helpers.Enum;
 
 namespace MuTote.Service.Services.ImpService
 {
@@ -23,12 +25,14 @@ namespace MuTote.Service.Services.ImpService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly ICacheService cache;
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper,ICacheService cache)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            this.cache = cache;
         }
-        public async Task<PagedResults<ProductResponse>> GetBestSellerProduct(PagingRequest paging)
+        public async Task<List<ProductResponse>> GetBestSellerProduct()
         {
             try
             {
@@ -39,27 +43,50 @@ namespace MuTote.Service.Services.ImpService
                     var count = new OrderFilterRequest();
                     var cam = result.Where(a => a.ProductId==order.ProductId).SingleOrDefault();
                     if (cam != null) continue;
+                    if (order.ProductId == null) continue;
                     count.ProductId = (int)order.ProductId;
                     count.Count = response.Where(a => a.ProductId == count.ProductId).ToList().Distinct().Count();
                     result.Add(count);
                 }
-                var orders = result.OrderByDescending(x => x.Count);
-                List<ProductResponse> list = new List<ProductResponse>();
-                ProductResponse rs = new ProductResponse();
+                var orders = result.OrderByDescending(x => x.Count).Take(10);
                 foreach (var ord in orders)
                 {
-                    rs =_mapper.Map<ProductResponse>(_unitOfWork.Repository<Product>().GetAll().Include(a=>a.CategoryProduct).Where(a => a.Id == ord.ProductId).SingleOrDefault());
-                    list.Add(rs);
+                   var rs =_unitOfWork.Repository<Product>().GetAll().Where(a => a.Id == ord.ProductId).SingleOrDefault();
+                    if(rs != null)
+                    {
+                        rs.IsBestSeller = true;
+                        _unitOfWork.Repository<Product>().Update(rs, ord.ProductId);
+                        await _unitOfWork.CommitAsync();
+                    }
                 }
-                var listPro = PageHelper<ProductResponse>.Paging(list, paging.Page, paging.PageSize);
-                return listPro;
+                var res= _unitOfWork.Repository<Product>().GetAll().Include(c => c.CategoryProduct)
+                                         .ProjectTo<ProductResponse>(_mapper.ConfigurationProvider)
+                                         .ToList();
+                var cacheData = cache.GetData<List<ProductResponse>>("Products");
+                if (cacheData !=null) cache.RemoveData("Products");
+                    var expiryTime = DateTimeOffset.Now.AddYears(1);
+                    cache.SetData<List<ProductResponse>>("Products", res, expiryTime);
+                    return res;
             }
             catch (Exception ex)
             {
                 throw new CrudException(HttpStatusCode.BadRequest, "Get Best Seller Product Error !!!", ex.InnerException?.Message);
             }
         }
-
+       public async Task<PagedResults<ProductResponse>> GetProductFilterByPrice(PagingRequest paging, decimal minPrice, decimal maxPrice, List<ProductResponse> listProduct)
+        {
+            try
+            {
+                var list = listProduct.Where(a => a.Price >= minPrice && a.Price <= maxPrice).ToList();
+                var sort = PageHelper<ProductResponse>.Sorting(paging.SortType, list, paging.ColName);
+                var listPro = PageHelper<ProductResponse>.Paging(sort, paging.Page, paging.PageSize);
+                return listPro;
+            }
+            catch (Exception ex)
+            {
+                throw new CrudException(HttpStatusCode.BadRequest, "Get list Product filter by price  Error !!!", ex.InnerException?.Message);
+            }
+        }
         public async Task<ProductResponse> GetProductById(int id)
         {
             try
@@ -91,16 +118,19 @@ namespace MuTote.Service.Services.ImpService
         {
             try
             {
-
+                
                 var filter = _mapper.Map<ProductResponse>(request);
-                var products = _unitOfWork.Repository<Product>().GetAll().Include(c => c.CategoryProduct)
-                                           .ProjectTo<ProductResponse>(_mapper.ConfigurationProvider)
-                                           .DynamicFilter(filter)
-                                           .ToList();
+                if (request.IsBestSeller ==false) filter.IsBestSeller = null;
+                var cacheData = cache.GetData<List<ProductResponse>>("Products");
+                var products= cacheData.AsQueryable().DynamicFilter(filter)
+                                         .ToList();
+                if (request.maxPrice != null && request.minPrice != null) return GetProductFilterByPrice( paging, (decimal)request.minPrice, (decimal)request.maxPrice,products).Result;
+               
                 var sort = PageHelper<ProductResponse>.Sorting(paging.SortType, products, paging.ColName);
                 var result = PageHelper<ProductResponse>.Paging(sort, paging.Page, paging.PageSize);
                 return result;
             }
+
             catch (CrudException ex)
             {
                 throw new CrudException(HttpStatusCode.BadRequest, "Get product list error!!!!!", ex.Message);
@@ -122,6 +152,8 @@ namespace MuTote.Service.Services.ImpService
                 }
 
                 var response = _mapper.Map<CreateProductRequest, Product>(product);
+                response.Status = (int)ProductStatusEnum.NewProduct;
+                response.IsBestSeller = false;
                 await _unitOfWork.Repository<Product>().CreateAsync(response);
                 await _unitOfWork.CommitAsync();
 
@@ -137,7 +169,7 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-       public async Task<ProductResponse> UpdateProduct(int id, int unitInStock)
+       public async Task<ProductResponse> UpdateProduct(int id, int? unitInStock, ProductStatusEnum? status)
         {
             try
             {
@@ -151,7 +183,8 @@ namespace MuTote.Service.Services.ImpService
                 {
                     throw new CrudException(HttpStatusCode.NotFound, $"Not found product with id {id.ToString()}", "");
                 }
-                response.UnitInStock = unitInStock;
+               if(unitInStock != null) response.UnitInStock =(int) unitInStock;
+                if(status !=null)response.Status=(int)status;
                 _unitOfWork.Repository<Product>().Update(response, id);
                 await _unitOfWork.CommitAsync();
                 return _mapper.Map<ProductResponse>(response);

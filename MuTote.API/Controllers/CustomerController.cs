@@ -92,7 +92,7 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost()]
-        public async Task<ActionResult<CustomerResponse>>CreateCustomer([FromBody] CreateCustomerRequest customer)
+        public async Task<ActionResult<JWTResponse>>CreateCustomer([FromBody] CreateCustomerRequest customer)
         {
             var rs = await _userService.CreateCustomer(customer);
             return Ok(rs);
@@ -104,7 +104,7 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authentication")]
-        public async Task<ActionResult<CustomerResponse>> Login([FromBody] LoginRequest model)
+        public async Task<ActionResult<JWTResponse>> Login([FromBody] LoginRequest model)
         {
             var rs = await _userService.Login(model);
             return Ok(rs);
@@ -116,7 +116,7 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("google-authentication")]
-        public async Task<ActionResult<CustomerResponse>> LoginGoogle([FromQuery] string googleId)
+        public async Task<ActionResult<JWTResponse>> LoginGoogle([FromQuery] string googleId)
         {
             var rs = await _userService.LoginByGoogle(googleId);
             return Ok(rs);

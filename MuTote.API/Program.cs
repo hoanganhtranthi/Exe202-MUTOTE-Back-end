@@ -1,7 +1,11 @@
+using BookStore.Data.Extensions;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MuTote.API.AppStart;
 using MuTote.API.Mapper;
 using MuTote.API.Utility;
 using MuTote.Data.Enities;
@@ -30,6 +34,7 @@ builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<IDesignerService, DesignerService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IWishListService, WishListService>();
+builder.Services.AddScoped<ICacheService, CacheService>();
 builder.Services.AddDbContext<MutoteContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
@@ -46,19 +51,8 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
         });
 });
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("_myAllowSpecificOrigins",
-        builder =>
-        {
-            builder
-            //.WithOrigins(GetDomain())
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-        });
-});
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.ConfigureHangfireServices(builder.Configuration);
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -113,7 +107,7 @@ builder.Services.AddAuthentication(x =>
     });
 //end JWT
 var app = builder.Build();
-
+app.UseHangfireDashboard();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

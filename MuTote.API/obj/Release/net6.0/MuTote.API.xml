@@ -269,17 +269,10 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:MuTote.API.Controllers.ProductController.GetProductsBestSeller(MuTote.Service.DTO.Request.PagingRequest)">
+        <member name="M:MuTote.API.Controllers.ProductController.UpdateProduct(System.Int32,System.Nullable{System.Int32},System.Nullable{MuTote.Service.Helpers.Enum.ProductStatusEnum})">
             <summary>
-            Get best seller products
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MuTote.API.Controllers.ProductController.DeleteProduct(System.Int32,System.Int32)">
-            <summary>
-            Update product's unit in stock
-            </summary>
+            Update product's unit in stock and status ( NewProduct=1, Avaliable = 2, OutOfStock = 0)
+            </summary> 
             <param name="id"></param>
             <returns></returns>
         </member>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MuTote.Service.DTO.Request;
 using MuTote.Service.DTO.Response;
 using MuTote.Service.Services.ISerive;
+using static MuTote.Service.Helpers.Enum;
 
 namespace MuTote.API.Controllers
 {
@@ -39,26 +40,15 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Get best seller products
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("best-seller-products")]
-        public async Task<ActionResult<ProductResponse>> GetProductsBestSeller([FromQuery] PagingRequest pagingRequest)
-        {
-            var rs = await _productService.GetBestSellerProduct(pagingRequest);
-            return Ok(rs);
-        }
-        /// <summary>
-        /// Update product's unit in stock
-        /// </summary>
+        /// Update product's unit in stock and status ( NewProduct=1, Avaliable = 2, OutOfStock = 0)
+        /// </summary> 
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ProductResponse>> DeleteProduct(int id, int unitInStock)
+        public async Task<ActionResult<ProductResponse>> UpdateProduct(int id, int? unitInStock, ProductStatusEnum? status)
         {
-            var rs = await _productService.UpdateProduct(id,unitInStock);
+            var rs = await _productService.UpdateProduct(id,unitInStock,status);
             if (rs == null) return NotFound();
             return Ok(rs);
         }
@@ -67,7 +57,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpPost()]
         public async Task<ActionResult<ProductResponse>> CreateProduct(CreateProductRequest product)
         {

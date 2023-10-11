@@ -18,6 +18,8 @@ namespace MuTote.Data.Enities
         public string? Description { get; set; }
         public int UnitInStock { get; set; }
         public int CategoryProductId { get; set; }
+        public int? Status { get; set; }
+        public bool? IsBestSeller { get; set; }
 
         public virtual CategoryProduct CategoryProduct { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

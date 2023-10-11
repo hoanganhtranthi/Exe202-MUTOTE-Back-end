@@ -25,7 +25,7 @@ namespace MuTote.Service.DTO.Request
         [DataType(DataType.Password)]
         [Compare("NewPassword")]
         public string? ConfirmNewPassword { get; set; }
-        [StringLength(int.MaxValue, MinimumLength = 3, ErrorMessage = "Invalid Name")]
+        [StringLength(int.MaxValue, MinimumLength = 3, ErrorMessage = "Invalid Gender")]
         public string? Gender { get; set; }
         [DateRange]
         public DateTime? DateOfBirth { get; set; }
