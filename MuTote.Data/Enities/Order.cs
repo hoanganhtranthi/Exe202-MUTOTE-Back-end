@@ -15,6 +15,8 @@ namespace MuTote.Data.Enities
         public decimal TotalPrice { get; set; }
         public int Status { get; set; }
         public int CustomerId { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
 
         public virtual Customer Customer { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

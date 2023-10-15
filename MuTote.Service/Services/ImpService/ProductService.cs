@@ -25,12 +25,10 @@ namespace MuTote.Service.Services.ImpService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ICacheService cache;
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper,ICacheService cache)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-            this.cache = cache;
         }
         public async Task<List<ProductResponse>> GetBestSellerProduct()
         {
@@ -62,10 +60,6 @@ namespace MuTote.Service.Services.ImpService
                 var res= _unitOfWork.Repository<Product>().GetAll().Include(c => c.CategoryProduct)
                                          .ProjectTo<ProductResponse>(_mapper.ConfigurationProvider)
                                          .ToList();
-                var cacheData = cache.GetData<List<ProductResponse>>("Products");
-                if (cacheData !=null) cache.RemoveData("Products");
-                    var expiryTime = DateTimeOffset.Now.AddYears(1);
-                    cache.SetData<List<ProductResponse>>("Products", res, expiryTime);
                     return res;
             }
             catch (Exception ex)
@@ -121,8 +115,8 @@ namespace MuTote.Service.Services.ImpService
                 
                 var filter = _mapper.Map<ProductResponse>(request);
                 if (request.IsBestSeller ==false) filter.IsBestSeller = null;
-                var cacheData = cache.GetData<List<ProductResponse>>("Products");
-                var products= cacheData.AsQueryable().DynamicFilter(filter)
+                var products = _unitOfWork.Repository<Product>().GetAll().Include(c => c.CategoryProduct)
+                                         .ProjectTo<ProductResponse>(_mapper.ConfigurationProvider).AsQueryable().DynamicFilter(filter)
                                          .ToList();
                 if (request.maxPrice != null && request.minPrice != null) return GetProductFilterByPrice( paging, (decimal)request.minPrice, (decimal)request.maxPrice,products).Result;
                

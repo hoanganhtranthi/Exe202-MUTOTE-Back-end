@@ -14,10 +14,8 @@ namespace MuTote.Service.Services.ISerive
         Task<DesignerResponse> GetToUpdateStatus(int id);
         Task<string> Verification(string request, string token);
         Task<DesignerResponse> Login(LoginRequest request);
-        Task<DesignerResponse> LoginByGoogle(string googleId);
         Task<DesignerResponse> CreateDesigner(CreateDesignerRequest request);
         Task<DesignerResponse> GetDesignerById(int id);
-        Task<string> GetJwt(int accountId);
         Task<DesignerResponse> UpdatePass(ResetPasswordRequest request);
         Task<DesignerResponse> UpdateDesigner(int customerId, UpdateDesignerRequest request);
     }
