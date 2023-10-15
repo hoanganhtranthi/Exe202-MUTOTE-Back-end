@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MuTote.Service.DTO.Request;
 using MuTote.Service.DTO.Response;
 using MuTote.Service.Services.ISerive;
+using static MuTote.Service.Helpers.Enum;
 
 namespace MuTote.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace MuTote.API.Controllers
         /// <param name="pagingRequest"></param>
         /// <param name="orderRequest"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<ActionResult<List<OrderResponse>>> GetOrders([FromQuery] PagingRequest pagingRequest, [FromQuery] OrderRequest orderRequest)
         {
@@ -34,7 +35,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-       [Authorize(Roles = "admin")]
+       //[Authorize(Roles = "admin")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<OrderResponse>> GetOrder(int id)
         {
@@ -46,7 +47,7 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+       //[Authorize(Roles = "admin")]
         [HttpGet("{ordId:int}/finished-order")]
         public async Task<ActionResult<OrderResponse>> GetToUpdateStatus(int ordId)
         {
@@ -66,17 +67,15 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Create order for designed product
+        /// Get reports on admin orders (  Month=1,  Quarter=0)
         /// </summary>
-        /// <param name="order"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost("/designed-product")]
-        public async Task<ActionResult<OrderResponse>> CreateOrderDesignProduct([FromBody] CreateOrderProductDesignRequest order)
+       //[Authorize(Roles = "admin")]
+        [HttpGet("order-report")]
+        public async Task<ActionResult<dynamic>> GetReportOrder(ReportOption option , int MonthsOrQuarter , int year)
         {
-            var rs = await _orderService.CreateOrderProductDesign(order);
+            var rs = await _orderService.GetOrdersReport(option,MonthsOrQuarter,year);
             return Ok(rs);
         }
-
     }
 }

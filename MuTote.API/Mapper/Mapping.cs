@@ -50,7 +50,6 @@ namespace MuTote.API.Mapper
             CreateMap<OrderDetail, OrderDetailResponse>().ReverseMap();
             CreateMap<OrderDetailRequest, OrderDetail>();
             CreateMap<CreateOrderRequest, Order>();
-            CreateMap<CreateOrderProductDesignRequest, Order>().ReverseMap();
             CreateMap<OrderRequest, Order>().ReverseMap();
             CreateMap<OrderRequest, OrderResponse>().ReverseMap();
             CreateMap<OrderDetailRequest, OrderDetailResponse>().ReverseMap();

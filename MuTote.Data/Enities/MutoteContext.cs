@@ -143,10 +143,13 @@ namespace MuTote.Data.Enities
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.Property(e => e.OrderDate).HasColumnType("date");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
                 entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 0)");
-
+                entity.Property(e => e.Address);
+                entity.Property(e => e.Phone)
+                   .HasMaxLength(10)
+                   .IsUnicode(false);
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)

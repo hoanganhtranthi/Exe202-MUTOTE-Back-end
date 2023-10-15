@@ -17,7 +17,9 @@ namespace MuTote.Service.DTO.Response
         public int? Status { get; set; }
         [IntAttribute]
         public int? CustomerId { get; set; }
-
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
         public virtual CustomerResponse Customer { get; set; } = null!;
         public virtual ICollection<OrderDetailResponse> OrderDetails { get; set; }
     }
@@ -30,5 +32,11 @@ namespace MuTote.Service.DTO.Response
         public string? Name { get; set; } = null!;
         public string? Img { get; set; }
         public decimal Price { get; set; }
+    }
+    public class OrderAmoutByCateRequest
+    {
+        public string CateName { get; set; }
+        public int Total { get; set; }
+        public decimal Amout { get; set; }
     }
 }

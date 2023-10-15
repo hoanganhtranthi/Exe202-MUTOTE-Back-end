@@ -26,7 +26,7 @@ namespace MuTote.API.Controllers
         /// <param name="pagingRequest"></param>
         /// <param name="userRequest"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+       // [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<ActionResult<List<CustomerResponse>>> GetCustomers([FromQuery] PagingRequest pagingRequest, [FromQuery] CustomerRequest userRequest)
         {
@@ -110,18 +110,6 @@ namespace MuTote.API.Controllers
             return Ok(rs);
         }
         /// <summary>
-        /// Login by googleId
-        /// </summary>
-        /// <param name="googleId"></param>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost("google-authentication")]
-        public async Task<ActionResult<JWTResponse>> LoginGoogle([FromQuery] string googleId)
-        {
-            var rs = await _userService.LoginByGoogle(googleId);
-            return Ok(rs);
-        }
-        /// <summary>
         /// Reset password when forgot password
         /// </summary>
         /// <param name="resetPassword"></param>
@@ -131,17 +119,6 @@ namespace MuTote.API.Controllers
         public async Task<ActionResult<CustomerResponse>> ResetPassword([FromQuery] ResetPasswordRequest resetPassword)
         {
             var rs = await _userService.UpdatePass(resetPassword);
-            return Ok(rs);
-        }
-        /// <summary>
-        /// Get JWT of account
-        /// </summary>
-        /// <param name="resetPassword"></param>
-        /// <returns></returns>
-        [HttpGet("jwt/{id}")]
-        public async Task<ActionResult<string>> GetJwt(int id)
-        {
-            var rs = await _userService.GetJwt(id);
             return Ok(rs);
         }
     }

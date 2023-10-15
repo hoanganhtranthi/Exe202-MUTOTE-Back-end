@@ -29,5 +29,10 @@ namespace MuTote.Service.Helpers
             Product=1,
             Material=0
         }
+        public enum ReportOption
+        {
+            Month=1,
+            Quarter=0,
+        }
     }
 }

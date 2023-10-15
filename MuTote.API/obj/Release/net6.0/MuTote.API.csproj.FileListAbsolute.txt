@@ -78,8 +78,6 @@ D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Twilio.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\MuTote.API.xml
 D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\obj\Release\net6.0\MuTote.API.xml
-D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Pipelines.Sockets.Unofficial.dll
-D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\StackExchange.Redis.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Hangfire.AspNetCore.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Hangfire.Core.dll
 D:\Exe202-MUTOTE-Back-end\MuTote.API\bin\Release\net6.0\Hangfire.MemoryStorage.dll

@@ -12,9 +12,9 @@ namespace MuTote.Service.Services.ISerive
     public interface IOrderService
     {
         Task<OrderResponse> CreateOrder(CreateOrderRequest request);
-        Task<OrderResponse> CreateOrderProductDesign(CreateOrderProductDesignRequest request);
         Task<PagedResults<OrderResponse>> GetOrders(OrderRequest request,PagingRequest paging);
         Task<OrderResponse> GetOrderById(int orderId);
         Task<OrderResponse> GetToUpdateOrderStatus(int orderId);
+        Task<dynamic> GetOrdersReport(ReportOption option, int MonthOrQuarter, int year);
     }
 }

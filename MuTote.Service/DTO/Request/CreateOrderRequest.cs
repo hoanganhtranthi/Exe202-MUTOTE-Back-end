@@ -12,6 +12,9 @@ namespace MuTote.Service.DTO.Request
     {
         [Required]
         public int CustomerId { get; set; }
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone is invalid")]
+        public string Phone { get; set; }
+        public string Address { get; set; }
         public virtual ICollection<OrderDetailRequest> OrderDetails { get; set; }
     }
     public class OrderDetailRequest

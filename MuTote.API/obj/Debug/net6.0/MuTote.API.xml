@@ -94,23 +94,9 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:MuTote.API.Controllers.CustomerController.LoginGoogle(System.String)">
-            <summary>
-            Login by googleId
-            </summary>
-            <param name="googleId"></param>
-            <returns></returns>
-        </member>
         <member name="M:MuTote.API.Controllers.CustomerController.ResetPassword(MuTote.Service.DTO.Request.ResetPasswordRequest)">
             <summary>
             Reset password when forgot password
-            </summary>
-            <param name="resetPassword"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MuTote.API.Controllers.CustomerController.GetJwt(System.Int32)">
-            <summary>
-            Get JWT of account
             </summary>
             <param name="resetPassword"></param>
             <returns></returns>
@@ -168,23 +154,9 @@
             <param name="model"></param>
             <returns></returns>
         </member>
-        <member name="M:MuTote.API.Controllers.DesignerController.LoginGoogle(System.String)">
-            <summary>
-            Sign Up account of designer by googleId
-            </summary>
-            <param name="googleId"></param>
-            <returns></returns>
-        </member>
         <member name="M:MuTote.API.Controllers.DesignerController.ResetPassword(MuTote.Service.DTO.Request.ResetPasswordRequest)">
             <summary>
             Reset password when forgot password
-            </summary>
-            <param name="resetPassword"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MuTote.API.Controllers.DesignerController.GetJwt(System.Int32)">
-            <summary>
-            Get JWT of account
             </summary>
             <param name="resetPassword"></param>
             <returns></returns>
@@ -247,11 +219,10 @@
             <param name="order"></param>
             <returns></returns>
         </member>
-        <member name="M:MuTote.API.Controllers.OrderController.CreateOrderDesignProduct(MuTote.Service.DTO.Request.CreateOrderProductDesignRequest)">
+        <member name="M:MuTote.API.Controllers.OrderController.GetReportOrder(MuTote.Service.Helpers.Enum.ReportOption,System.Int32,System.Int32)">
             <summary>
-            Create order for designed product
+            Get reports on admin orders (  Month=1,  Quarter=0)
             </summary>
-            <param name="order"></param>
             <returns></returns>
         </member>
         <member name="M:MuTote.API.Controllers.ProductController.GetProducts(MuTote.Service.DTO.Request.PagingRequest,MuTote.Service.DTO.Request.ProductRequest)">

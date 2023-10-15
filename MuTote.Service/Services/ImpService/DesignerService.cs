@@ -215,26 +215,7 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-        public async Task<string> GetJwt(int accountId)
-        {
-            try
-            {
-                var account = await _unitOfWork.Repository<Designer>().GetById(accountId);
-                if (account == null)
-                {
-                    throw new CrudException(HttpStatusCode.NotFound, $"Not found designer with id {accountId}", "");
-                }
-                return GenerateJwtToken(account);
-            }
-            catch (CrudException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw new CrudException(HttpStatusCode.BadRequest, "Get Jwt error!!!!!", ex.Message);
-            }
-        }
+       
 
         public async Task<DesignerResponse> Login(LoginRequest request)
         {
@@ -261,27 +242,7 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-        public async Task<DesignerResponse> LoginByGoogle(string googleId)
-        {
-            try
-            {
-                var user = _unitOfWork.Repository<Designer>().GetAll()
-                   .FirstOrDefault(u => u.GoogleId.Equals(googleId.Trim()) && u.Status == 1);
-
-                if (user == null) throw new CrudException(HttpStatusCode.BadRequest, $"User Not Found with googleId {googleId}", "");
-                var cus = _mapper.Map<Designer, DesignerResponse>(user);
-                cus.Token = GenerateJwtToken(user);
-                return cus;
-            }
-            catch (CrudException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw new CrudException(HttpStatusCode.BadRequest, "Progress Error!!!", ex.InnerException?.Message);
-            }
-        }
+      
 
         public async Task<DesignerResponse> UpdateDesigner(int designerId, UpdateDesignerRequest request)
         {

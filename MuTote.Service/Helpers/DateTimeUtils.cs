@@ -29,5 +29,9 @@ namespace MuTote.Service.Helpers
         {
             return DateTime.UtcNow.AddHours(7);
         }
+        public static int GetQuarter(this DateTime dt)
+            {
+                return (dt.Month - 1) / 3 + 1;
+             }
     }
 }

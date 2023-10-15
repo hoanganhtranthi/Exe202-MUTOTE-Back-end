@@ -216,27 +216,6 @@ namespace MuTote.Service.Services.ImpService
             }
         }
 
-        public async Task<string> GetJwt(int accountId)
-        {
-            try
-            {
-                var account = await _unitOfWork.Repository<Customer>().GetById(accountId);
-                if (account == null)
-                {
-                    throw new CrudException(HttpStatusCode.NotFound, $"Not found customer with id {accountId}", "");
-                }
-                return GenerateJwtToken(account);
-            }
-            catch (CrudException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw new CrudException(HttpStatusCode.BadRequest, "Get Jwt error!!!!!", ex.Message);
-            }
-        }
-
         public async Task<JWTResponse> Login(LoginRequest request)
         {
             try
@@ -259,30 +238,6 @@ namespace MuTote.Service.Services.ImpService
                 JWTResponse jWTResponse = new JWTResponse();
                 jWTResponse.Customer = cus;
                 jWTResponse.Token= GenerateJwtToken(user);                
-                return jWTResponse;
-            }
-            catch (CrudException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw new CrudException(HttpStatusCode.BadRequest, "Progress Error!!!", ex.InnerException?.Message);
-            }
-        }
-
-        public async Task<JWTResponse> LoginByGoogle(string googleId)
-        {
-            try
-            {
-                var user = _unitOfWork.Repository<Customer>().GetAll()
-                   .FirstOrDefault(u => u.GoogleId.Equals(googleId.Trim()) && u.Status==1);
-
-                if (user == null) throw new CrudException(HttpStatusCode.BadRequest, $"User Not Found with googleId {googleId}", "");
-                var cus = _mapper.Map<Customer, CustomerResponse>(user);
-                JWTResponse jWTResponse = new JWTResponse();
-                jWTResponse.Customer = cus;
-                jWTResponse.Token = GenerateJwtToken(user);
                 return jWTResponse;
             }
             catch (CrudException ex)
