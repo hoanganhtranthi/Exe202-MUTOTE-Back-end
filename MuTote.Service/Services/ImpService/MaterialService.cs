@@ -1,20 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-using MuTote.Data.Enities;
-using MuTote.Data.UnitOfWork;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Exceptions;
-using MuTote.Service.Helpers;
-using MuTote.Service.Services.ISerive;
-using MuTote.Service.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MuTote.Service.Services.ImpService
 {

@@ -1,20 +1,13 @@
-using BookStore.Data.Extensions;
+
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MuTote.API.AppStart;
-using MuTote.API.Mapper;
-using MuTote.API.Utility;
-using MuTote.Data.Enities;
-using MuTote.Data.UnitOfWork;
-using MuTote.Service.Service;
-using MuTote.Service.Services.ImpService;
-using MuTote.Service.Services.ISerive;
+using MuTote.Application.GlobalExceptionHandling.Utility;
 using System.Reflection;
 using System.Text;
+using ThinkTank.Infrastructures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,21 +17,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Mapping));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ICustomerService, CustomerService>();
-builder.Services.AddScoped<IFileStorageService, FirebaseStorageService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IMaterialService, MaterialService>();
-builder.Services.AddScoped<IProductService,ProductService>();
-builder.Services.AddScoped<IDesignerService, DesignerService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IWishListService, WishListService>();
-builder.Services.AddScoped<ICacheService, CacheService>();
-builder.Services.AddDbContext<MutoteContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
-});
+builder.Services.AddInfrastructuresService(builder.Configuration);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("_myAllowSpecificOrigins",
@@ -127,7 +107,6 @@ else
 
 app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 app.UseHttpsRedirection();
-app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 app.UseCors("_myAllowSpecificOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
