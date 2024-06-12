@@ -2,8 +2,6 @@ using System;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using Hangfire.SqlServer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace MuTote.API.AppStart
 {

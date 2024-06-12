@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
 using MuTote.Service.Services.ISerive;
+using System.Net;
 
 namespace MuTote.API.Controllers
 {
@@ -22,7 +23,8 @@ namespace MuTote.API.Controllers
         /// <param name="wishlistRequest"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<WishListResponse>>> GetWishLists([FromQuery] PagingRequest pagingRequest, [FromQuery] WishListRequest wishlistRequest)
+        [ProducesResponseType(typeof(PagedResults<WishListResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetWishLists([FromQuery] PagingRequest pagingRequest, [FromQuery] WishListRequest wishlistRequest)
         {
             var rs = await _wishlistService.GetWishLists(wishlistRequest, pagingRequest);
             return Ok(rs);
@@ -33,7 +35,8 @@ namespace MuTote.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<WishListResponse>> GetWishList(int id)
+        [ProducesResponseType(typeof(WishListResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetWishList(int id)
         {
             var rs = await _wishlistService.GetWishListById(id);
             return Ok(rs);
@@ -41,12 +44,13 @@ namespace MuTote.API.Controllers
         /// <summary>
         /// Update information of wishlist
         /// </summary>
-        /// <param name="wishlistRequest"></param>
+        /// <param name="quantity"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize(Roles = "customer")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<WishListResponse>> UpdateWishList(int quantity, int id)
+        [ProducesResponseType(typeof(WishListResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateWishList(int quantity, int id)
         {
             var rs = await _wishlistService.UpdateWishList(id,quantity);
             if (rs == null) return NotFound();
@@ -59,7 +63,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "customer")]
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<WishListResponse>> DeleteWishList(int id)
+        [ProducesResponseType(typeof(WishListResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteWishList(int id)
         {
             var rs = await _wishlistService.DeleteWishList(id);
             if (rs == null) return NotFound();
@@ -72,7 +77,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "customer")]
         [HttpPost()]
-        public async Task<ActionResult<WishListResponse>> CreateWishList(CreateWishListRequest wishlist)
+        [ProducesResponseType(typeof(WishListResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateWishList(CreateWishListRequest wishlist)
         {
             var rs = await _wishlistService.InsertWishList(wishlist);
             return Ok(rs);

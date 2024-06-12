@@ -1,12 +1,10 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Data.Enities;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Services.ISerive;
-using System;
-using System.Data;
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
+using MuTote.Application.Services.ISerive;
+using System.Net;
 
 namespace MuTote.API.Controllers
 {
@@ -26,9 +24,10 @@ namespace MuTote.API.Controllers
         /// <param name="pagingRequest"></param>
         /// <param name="userRequest"></param>
         /// <returns></returns>
-       // [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
-        public async Task<ActionResult<List<CustomerResponse>>> GetCustomers([FromQuery] PagingRequest pagingRequest, [FromQuery] CustomerRequest userRequest)
+        [ProducesResponseType(typeof(PagedResults<CustomerResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetCustomers([FromQuery] PagingRequest pagingRequest, [FromQuery] CustomerRequest userRequest)
         {
             var rs = await _userService.GetCustomers(userRequest, pagingRequest);
             return Ok(rs);
@@ -40,7 +39,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
        [Authorize(Roles = "admin")]
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<CustomerResponse>> GetCustomer(int id)
+        [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetCustomer(int id)
         {
             var rs = await _userService.GetCustomerById(id);
             return Ok(rs);
@@ -53,7 +53,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "customer")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<CustomerResponse>> UpdateCustomer([FromBody] UpdateCustomerRequest userRequest, int id)
+        [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerRequest userRequest, int id)
         {
             var rs = await _userService.UpdateCustomer(id, userRequest);
             if (rs == null) return NotFound();
@@ -66,7 +67,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet("{cusId:int}/blocked-user")]
-        public async Task<ActionResult<CustomerResponse>> GetToUpdateStatus(int cusId)
+        [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetToUpdateStatus(int cusId)
         {
             var rs = await _userService.GetToUpdateStatus(cusId);
             return Ok(rs);
@@ -74,13 +76,12 @@ namespace MuTote.API.Controllers
         /// <summary>
         /// Send OTP 
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="phone"></param>
-        /// <param name="googleId"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("verification")]
-        public async Task<ActionResult<string>> Verification([FromQuery] string phone, [FromQuery] string? token)
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Verification([FromQuery] string phone, [FromQuery] string? token)
         {
             var rs = await _userService.Verification(phone,token);
             return Ok(rs);
@@ -92,7 +93,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost()]
-        public async Task<ActionResult<JWTResponse>>CreateCustomer([FromBody] CreateCustomerRequest customer)
+        [ProducesResponseType(typeof(JWTResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult>CreateCustomer([FromBody] CreateCustomerRequest customer)
         {
             var rs = await _userService.CreateCustomer(customer);
             return Ok(rs);
@@ -104,7 +106,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authentication")]
-        public async Task<ActionResult<JWTResponse>> Login([FromBody] LoginRequest model)
+        [ProducesResponseType(typeof(JWTResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
             var rs = await _userService.Login(model);
             return Ok(rs);
@@ -116,7 +119,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("forgotten-password")]
-        public async Task<ActionResult<CustomerResponse>> ResetPassword([FromQuery] ResetPasswordRequest resetPassword)
+        [ProducesResponseType(typeof(CustomerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordRequest resetPassword)
         {
             var rs = await _userService.UpdatePass(resetPassword);
             return Ok(rs);

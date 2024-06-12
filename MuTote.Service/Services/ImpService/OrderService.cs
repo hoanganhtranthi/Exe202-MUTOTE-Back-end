@@ -236,7 +236,6 @@ namespace MuTote.Service.Services.ImpService
                     var jobId = BackgroundJob.Schedule(() =>
                      UpdateProductQuantity((int)ord.ProductId,ord.Quantity),
                      TimeSpan.FromMinutes(1));
-
                 }
 
                 await _unitOfWork.Repository<Order>().Update(order,orderId);
@@ -278,6 +277,7 @@ namespace MuTote.Service.Services.ImpService
         public async Task<dynamic> GetOrdersReport(ReportOption option, int MonthOrQuarter, int year)
         {
             List<OrderDetail> orders = new List<OrderDetail>();
+
             if ((int)option == 1)
                 orders = _unitOfWork.Repository<OrderDetail>().GetAll().Include(c => c.Product).Include(c => c.Product.CategoryProduct).Include(c => c.Order)
                         .Where(a => a.Order.OrderDate.Value.Month == MonthOrQuarter && a.Order.OrderDate.Value.Year == year).ToList();

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Services.ISerive;
-using System.Data;
-
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
+using MuTote.Application.Services.ISerive;
+using System.Net;
+using static MuTote.Domain.Enums.Enum;
 
 namespace MuTote.API.Controllers
 {
@@ -20,13 +20,12 @@ namespace MuTote.API.Controllers
         /// <summary>
         /// Get list of categories
         /// </summary>
-        /// <param name="pagingRequest"></param>
-        /// <param name="categoryRequest"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<CategoryResponse>>> GetCategorys([FromQuery] PagingRequest pagingRequest, [FromQuery] CategoryRequest categoryRequest, Service.Helpers.Enum.CategoryChoice choice)
+        [ProducesResponseType(typeof(List<CategoryResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetCategorys(CategoryChoice choice)
         {
-            var rs = await _categoryService.GetCategorys(categoryRequest, pagingRequest,choice);
+            var rs = await _categoryService.GetCategorys(choice);
             return Ok(rs);
         }
         /// <summary>
@@ -35,7 +34,8 @@ namespace MuTote.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<CategoryResponse>> GetCategory(int id, Service.Helpers.Enum.CategoryChoice choice)
+        [ProducesResponseType(typeof(CategoryResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetCategory(int id,CategoryChoice choice)
         {
             var rs = await _categoryService.GetCategoryById(id,choice);
             return Ok(rs);
@@ -46,9 +46,10 @@ namespace MuTote.API.Controllers
         /// <param name="categoryRequest"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-       [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<CategoryResponse>> UpdateCategory([FromBody] CreateCategoryRequest categoryRequest, int id, Service.Helpers.Enum.CategoryChoice choice)
+        [ProducesResponseType(typeof(CategoryResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CategoryResponse>> UpdateCategory([FromBody] CreateCategoryRequest categoryRequest, int id, CategoryChoice choice)
         {
             var rs = await _categoryService.UpdateCategory(id, categoryRequest,choice);
             if (rs == null) return NotFound();
@@ -61,7 +62,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<CategoryResponse>> DeleteCategory(int id, Service.Helpers.Enum.CategoryChoice choice)
+        [ProducesResponseType(typeof(CategoryResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteCategory(int id, CategoryChoice choice)
         {
             var rs = await _categoryService.DeleteCategory(id, choice);
             if (rs == null) return NotFound();
@@ -74,7 +76,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpPost()]
-        public async Task<ActionResult<CategoryResponse>> CreateCategory(CreateCategoryRequest category, Service.Helpers.Enum.CategoryChoice choice)
+        [ProducesResponseType(typeof(CategoryResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateCategory(CreateCategoryRequest category,CategoryChoice choice)
         {
             var rs = await _categoryService.InsertCategory(category,choice);
             return Ok(rs);

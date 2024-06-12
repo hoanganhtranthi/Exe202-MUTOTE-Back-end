@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Services.ISerive;
-using System.Data;
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
+using MuTote.Application.Services.ISerive;
+using System.Net;
 
 namespace MuTote.API.Controllers
 {
@@ -23,7 +23,8 @@ namespace MuTote.API.Controllers
         /// <param name="materialRequest"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<MaterialResponse>>> GetMaterials([FromQuery] PagingRequest pagingRequest, [FromQuery] MaterialRequest materialRequest)
+        [ProducesResponseType(typeof(PagedResults<MaterialResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetMaterials([FromQuery] PagingRequest pagingRequest, [FromQuery] MaterialRequest materialRequest)
         {
             var rs = await _materialService.GetMaterials(materialRequest, pagingRequest);
             return Ok(rs);
@@ -34,7 +35,8 @@ namespace MuTote.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<MaterialResponse>> GetMaterial(int id)
+        [ProducesResponseType(typeof(MaterialResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetMaterial(int id)
         {
             var rs = await _materialService.GetMaterialById(id);
             return Ok(rs);
@@ -45,9 +47,10 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<MaterialResponse>> DeleteMaterial(int id)
+        [ProducesResponseType(typeof(MaterialResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteMaterial(int id)
         {
             var rs = await _materialService.DeleteMaterial(id);
             if (rs == null) return NotFound();
@@ -60,7 +63,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin" + "," + "designer")]
         [HttpPost()]
-        public async Task<ActionResult<MaterialResponse>> CreateMaterial(CreateMaterialRequest material)
+        [ProducesResponseType(typeof(MaterialResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateMaterial(CreateMaterialRequest material)
         {
             var rs = await _materialService.InsertMaterial(material);
             return Ok(rs);

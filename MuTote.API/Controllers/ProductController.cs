@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Services.ISerive;
-using static MuTote.Service.Helpers.Enum;
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
+using MuTote.Application.Services.ISerive;
+using System.Net;
+using static MuTote.Domain.Enums.Enum;
 
 namespace MuTote.API.Controllers
 {
@@ -23,7 +24,8 @@ namespace MuTote.API.Controllers
         /// <param name="productRequest"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<List<ProductResponse>>> GetProducts([FromQuery] PagingRequest pagingRequest, [FromQuery] ProductRequest productRequest)
+        [ProducesResponseType(typeof(PagedResults<ProductResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetProducts([FromQuery] PagingRequest pagingRequest, [FromQuery] ProductRequest productRequest)
         {
             var rs = await _productService.GetProducts(productRequest, pagingRequest);
             return Ok(rs);
@@ -34,7 +36,8 @@ namespace MuTote.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductResponse>> GetProduct(int id)
+        [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetProduct(int id)
         {
             var rs = await _productService.GetProductById(id);
             return Ok(rs);
@@ -43,10 +46,12 @@ namespace MuTote.API.Controllers
         /// Update product's unit in stock and status ( NewProduct=1, Avaliable = 2, OutOfStock = 0)
         /// </summary> 
         /// <param name="id"></param>
+        /// /// <param name="unitInStock"></param>
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<ProductResponse>> UpdateProduct(int id, int? unitInStock, ProductStatusEnum? status)
+        [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateProduct(int id, int? unitInStock, ProductStatusEnum? status)
         {
             var rs = await _productService.UpdateProduct(id,unitInStock,status);
             if (rs == null) return NotFound();
@@ -57,9 +62,10 @@ namespace MuTote.API.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost()]
-        public async Task<ActionResult<ProductResponse>> CreateProduct(CreateProductRequest product)
+        [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateProduct(CreateProductRequest product)
         {
             var rs = await _productService.InsertProduct(product);
             return Ok(rs);

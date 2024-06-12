@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuTote.API", "MuTote.API\MuTote.API.csproj", "{14634D44-0982-4C88-9329-30AA9DC2F24F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MuTote.API", "MuTote.API\MuTote.API.csproj", "{14634D44-0982-4C88-9329-30AA9DC2F24F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuTote.Data", "MuTote.Data\MuTote.Data.csproj", "{8D6E7BD4-96E1-43DD-9D71-7936EC8B10BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MuToe.Application", "MuToe.Application\MuToe.Application.csproj", "{5AF7E53B-30F2-4838-BBF4-7F891C5109F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuTote.Service", "MuTote.Service\MuTote.Service.csproj", "{83052D28-0C2C-4ED8-8E3E-FD777D676D6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuTote.Domain", "MuTote.Domain\MuTote.Domain.csproj", "{2F5227B9-AC65-4FDF-BE01-35C49E771180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mutote.Infrastructures", "Mutote.Infrastructures\Mutote.Infrastructures.csproj", "{1C17C6A0-6B87-416C-B938-D298E3D20252}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{14634D44-0982-4C88-9329-30AA9DC2F24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14634D44-0982-4C88-9329-30AA9DC2F24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14634D44-0982-4C88-9329-30AA9DC2F24F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D6E7BD4-96E1-43DD-9D71-7936EC8B10BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D6E7BD4-96E1-43DD-9D71-7936EC8B10BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D6E7BD4-96E1-43DD-9D71-7936EC8B10BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D6E7BD4-96E1-43DD-9D71-7936EC8B10BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83052D28-0C2C-4ED8-8E3E-FD777D676D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83052D28-0C2C-4ED8-8E3E-FD777D676D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83052D28-0C2C-4ED8-8E3E-FD777D676D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83052D28-0C2C-4ED8-8E3E-FD777D676D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AF7E53B-30F2-4838-BBF4-7F891C5109F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AF7E53B-30F2-4838-BBF4-7F891C5109F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AF7E53B-30F2-4838-BBF4-7F891C5109F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AF7E53B-30F2-4838-BBF4-7F891C5109F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F5227B9-AC65-4FDF-BE01-35C49E771180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F5227B9-AC65-4FDF-BE01-35C49E771180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F5227B9-AC65-4FDF-BE01-35C49E771180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F5227B9-AC65-4FDF-BE01-35C49E771180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C17C6A0-6B87-416C-B938-D298E3D20252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C17C6A0-6B87-416C-B938-D298E3D20252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C17C6A0-6B87-416C-B938-D298E3D20252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C17C6A0-6B87-416C-B938-D298E3D20252}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

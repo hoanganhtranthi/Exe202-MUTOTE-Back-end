@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MuTote.Service.DTO.Request;
-using MuTote.Service.DTO.Response;
-using MuTote.Service.Services.ISerive;
+using MuTote.Application.DTO.Request;
+using MuTote.Application.DTO.Response;
+using MuTote.Application.Services.ISerive;
+using System.Net;
 
 namespace MuTote.API.Controllers
 {
@@ -24,7 +25,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public async Task<ActionResult<List<DesignerResponse>>> GetDesigners([FromQuery] PagingRequest pagingRequest, [FromQuery] DesignerRequest userRequest)
+        [ProducesResponseType(typeof(PagedResults<DesignerResponse>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDesigners([FromQuery] PagingRequest pagingRequest, [FromQuery] DesignerRequest userRequest)
         {
             var rs = await _userService.GetDesigners(userRequest, pagingRequest);
             return Ok(rs);
@@ -36,7 +38,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<DesignerResponse>> GetDesigner(int id)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDesigner(int id)
         {
             var rs = await _userService.GetDesignerById(id);
             return Ok(rs);
@@ -49,7 +52,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "designer")]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<DesignerResponse>> UpdateDesigner([FromBody] UpdateDesignerRequest userRequest, int id)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateDesigner([FromBody] UpdateDesignerRequest userRequest, int id)
         {
             var rs = await _userService.UpdateDesigner(id, userRequest);
             if (rs == null) return NotFound();
@@ -62,7 +66,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet("{cusId:int}/blocked-user")]
-        public async Task<ActionResult<DesignerResponse>> GetToUpdateStatus(int cusId)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetToUpdateStatus(int cusId)
         {
             var rs = await _userService.GetToUpdateStatus(cusId);
             return Ok(rs);
@@ -70,13 +75,12 @@ namespace MuTote.API.Controllers
         /// <summary>
         /// Send OTP 
         /// </summary>
-        /// <param name="request"></param>
         /// <param name="phone"></param>
-        /// <param name="googleId"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("verification")]
-        public async Task<ActionResult<string>> Verification([FromQuery] string phone, [FromQuery] string? token)
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Verification([FromQuery] string phone, [FromQuery] string? token)
         {
             var rs = await _userService.Verification(phone, token);
             return Ok(rs);
@@ -88,7 +92,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost()]
-        public async Task<ActionResult<DesignerResponse>> CreateDesigner([FromBody] CreateDesignerRequest designer)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateDesigner([FromBody] CreateDesignerRequest designer)
         {
             var rs = await _userService.CreateDesigner(designer);
             return Ok(rs);
@@ -100,7 +105,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authentication")]
-        public async Task<ActionResult<DesignerResponse>> Login([FromBody] LoginRequest model)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
             var rs = await _userService.Login(model);
             return Ok(rs);
@@ -112,7 +118,8 @@ namespace MuTote.API.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("forgotten-password")]
-        public async Task<ActionResult<DesignerResponse>> ResetPassword([FromQuery] ResetPasswordRequest resetPassword)
+        [ProducesResponseType(typeof(DesignerResponse), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordRequest resetPassword)
         {
             var rs = await _userService.UpdatePass(resetPassword);
             return Ok(rs);

@@ -1,8 +1,7 @@
 ﻿
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
-using MuTote.Service.Services.ISerive;
+using MuTote.Application.Services.ISerive;
+using System.Net;
 
 namespace MuTote.API.Controllers
 {
@@ -17,7 +16,8 @@ namespace MuTote.API.Controllers
             _fileStorageService = fileStorageService;
         }
         [HttpPost]
-        public async Task<ActionResult<string>> UploadFile(IFormFile file)
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file.Length > MAX_UPLOAD_FILE_SIZE)
                 return BadRequest("Exceed 25MB");
